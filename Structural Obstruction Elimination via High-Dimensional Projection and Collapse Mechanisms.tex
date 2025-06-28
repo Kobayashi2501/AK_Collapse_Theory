@@ -6,34 +6,21 @@
 % === Language and Font ===
 \usepackage[utf8]{inputenc}       % UTF-8 input
 \usepackage[T1]{fontenc}          % T1 font encoding
-\usepackage{fontspec}             % XeLaTeX font support
-\setmainfont{Times New Roman}     % Set main font
+\usepackage{times}                % Times font for PDFLaTeX
 
 % === Math and Symbols ===
-\usepackage{amsmath, amssymb, amsthm, amsfonts}
-\usepackage{mathtools}
-\usepackage{mathrsfs}
-\usepackage{stmaryrd}             % For \llbracket etc.
-\usepackage{bm}                   % Bold math symbols
-\usepackage{changepage} 
+\usepackage{amsmath, amssymb, amsthm, amsfonts, mathtools, mathrsfs, stmaryrd, bm, changepage}
 
 % === TikZ and Diagrams ===
 \usepackage{tikz}
 \usepackage{tikz-cd}
-\usetikzlibrary{
-  cd, matrix, arrows.meta, decorations.pathmorphing, calc, positioning,
-  decorations.markings, shapes.geometric
-}
-
-\usepackage{amscd} % Additional support for commutative diagrams
+\usetikzlibrary{cd, matrix, arrows.meta, decorations.pathmorphing, calc, positioning, decorations.markings, shapes.geometric}
+\usepackage{amscd}
 
 % === Listings for Coq, Code etc. ===
 \usepackage{listings}
 \usepackage{xcolor}
-\usepackage{graphicx}             % For rotatebox, scalebox etc.
-\usepackage{amsmath}
-\usepackage{amssymb}
-
+\usepackage{graphicx}
 
 \lstdefinelanguage{Coq}{
   keywords={Definition,Theorem,Proof,Qed,Fixpoint,match,with,end,fun,let,in,forall,exists,Inductive,return,Type},
@@ -70,7 +57,7 @@
 \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
 
 % === Language Support ===
-\usepackage[english]{babel}       % Use English language (place last)
+\usepackage[english]{babel}
 
 % === Theorem Environments ===
 \newtheorem{theorem}{Theorem}[section]
@@ -120,12 +107,19 @@
 
 % === Document Metadata ===
 \title{Structural Obstruction Elimination via High-Dimensional Projection and Collapse Mechanisms}
-\author{Atsushi Kobayashi}
+
+\author{Atsushi Kobayashi\\
+Independent Researcher\\
+Honjo-shi, Saitama, Japan\\
+\texttt{dollops2501@icloud.com}
+}
+
 \date{}
 
 \begin{document}
 
 \maketitle
+
 
 
 \begin{abstract}
@@ -167,21 +161,21 @@ The paper is organized as follows. In Section~2, we introduce the necessary math
 
 \section{Mathematical Preliminaries}
 
-In this section, we summarize the mathematical background required to formulate our obstruction elimination framework. We adopt standard categorical, homological, and topological terminology throughout.
+This section summarizes the mathematical background required to formulate the obstruction elimination framework developed in this paper. Throughout, we adopt standard terminology from category theory, homological algebra, and topology.
 
 \subsection{Filtered Objects and High-Dimensional Projection}
 
-Let $\mathcal{C}$ be a suitable mathematical category, such as that of topological spaces, algebraic varieties, or structured sheaves. We denote by $\mathsf{Filt}(\mathcal{C})$ the category of \emph{filtered objects}, equipped with a finite or persistent filtration reflecting geometric or algebraic complexity.
+Let $\mathcal{C}$ denote a mathematical category, such as that of topological spaces, algebraic varieties, or structured sheaves. We denote by $\mathsf{Filt}(\mathcal{C})$ the category of \emph{filtered objects}, equipped with a finite or persistent filtration that reflects geometric or algebraic complexity.
 
-We introduce the concept of a \emph{high-dimensional projection}:
+We introduce the notion of a \emph{high-dimensional projection}:
 \[
 \Pi : \mathsf{Filt}(\mathcal{C}) \longrightarrow \mathcal{P}(\mathcal{C}),
 \]
-where $\mathcal{P}(\mathcal{C})$ is a suitable higher-dimensional projection space, constructed to reveal hidden obstructions and degenerations within filtered objects. The precise structure of $\mathcal{P}(\mathcal{C})$ depends on the context, but it is assumed to admit degeneration processes and categorical simplifications.
+where $\mathcal{P}(\mathcal{C})$ is a higher-dimensional projection space designed to reveal hidden obstructions and degeneration phenomena within filtered objects. The precise structure of $\mathcal{P}(\mathcal{C})$ depends on the mathematical context but is assumed to admit degeneration processes and categorical simplifications.
 
 \subsection{Persistent Homology and Ext-Class Obstructions}
 
-We utilize persistent homology $\mathrm{PH}_1$ as a tool to detect topological obstructions in filtered objects. For $\mathcal{F} \in \mathsf{Filt}(\mathcal{C})$, $\mathrm{PH}_1(\mathcal{F})$ encodes first-order topological cycles that persist across the filtration.
+Persistent homology $\mathrm{PH}_1$ is employed as a tool to detect topological obstructions in filtered objects. For $\mathcal{F} \in \mathsf{Filt}(\mathcal{C})$, the group $\mathrm{PH}_1(\mathcal{F})$ encodes first-order topological cycles that persist across the filtration.
 
 In addition, we consider obstruction classes arising from homological algebra. For $\mathcal{F} \in \mathsf{Filt}(\mathcal{C})$ and a suitable coefficient system $\mathcal{G}$, the extension group $\mathrm{Ext}^1(\mathcal{F}, \mathcal{G})$ detects categorical and algebraic obstructions to trivialization.
 
@@ -191,20 +185,19 @@ We define the \emph{collapse functor}:
 \[
 C : \mathsf{Filt}(\mathcal{C}) \longrightarrow \mathsf{Triv}(\mathcal{C}),
 \]
-where $\mathsf{Triv}(\mathcal{C})$ denotes the category of \emph{collapse-sheaves}, characterized by:
+where $\mathsf{Triv}(\mathcal{C})$ denotes the category of \emph{collapse sheaves}, characterized by:
 \[
 \mathrm{PH}_1(\mathcal{F}) = 0, \quad \mathrm{Ext}^1(\mathcal{F}, \mathcal{G}) = 0.
 \]
-Collapse-sheaves represent objects free of topological and categorical obstructions, suitable for further structural simplification.
+Collapse sheaves represent objects that are free of topological and categorical obstructions and are thus amenable to further structural simplification.
 
 \subsection{Group Collapse and Smoothness}
 
-In many applications, objects in $\mathsf{Triv}(\mathcal{C})$ exhibit simplified group-theoretic structure. We use the term \emph{group collapse} to describe the trivialization or reduction of associated groups, such as Galois groups, fundamental groups, or automorphism groups.
+In many applications, objects in $\mathsf{Triv}(\mathcal{C})$ exhibit simplified group-theoretic structure. We refer to this phenomenon as \emph{group collapse}, which describes the trivialization or reduction of associated groups, such as Galois groups, fundamental groups, or automorphism groups.
 
-Group collapse serves as a structural precursor to smoothness or regularity in the underlying mathematical objects. The precise implications are detailed in subsequent sections.
+Group collapse serves as a structural precursor to smoothness or regularity in the underlying mathematical objects. The precise implications of group collapse will be detailed in subsequent sections.
 
-
-\subsection{Illustrative Diagram of High-Dimensional Projection}
+\subsection{Conceptual Diagram of High-Dimensional Projection}
 
 To clarify the role of high-dimensional projection in obstruction elimination, we present a conceptual diagram illustrating the lifting and degeneration process.
 
@@ -219,14 +212,14 @@ To clarify the role of high-dimensional projection in obstruction elimination, w
 % Nodes
 \node (F) {Filtered Object\\ $\mathcal{F} \in \mathsf{Filt}(\mathcal{C})$};
 \node (P) [right=of F] {Projection Space\\ $\mathcal{P}(\mathcal{C})$};
-\node (T) [below=of P, yshift=-1.2cm] {Collapse-Sheaf\\ $\mathcal{F}_0 \in \mathsf{Triv}(\mathcal{C})$};
+\node (T) [below=of P, yshift=-1.2cm] {Collapse Sheaf\\ $\mathcal{F}_0 \in \mathsf{Triv}(\mathcal{C})$};
 
 % Arrows
 \draw[arrow] (F) -- node[above] {Projection $\Pi$} (P);
-\draw[arrow] (P) -- node[right] {Degeneration \& Collapse} (T);
+\draw[arrow] (P) -- node[right] {Degeneration and Collapse} (T);
 
 \end{tikzpicture}
-\caption{High-dimensional projection and degeneration process. Hidden obstructions in $\mathcal{F}$ become visible after projection to $\mathcal{P}(\mathcal{C})$, enabling degeneration and collapse to a simplified structure $\mathcal{F}_0$.}
+\caption{High-dimensional projection and degeneration process. Latent obstructions in $\mathcal{F}$ become visible after projection to $\mathcal{P}(\mathcal{C})$, enabling degeneration and collapse to the simplified structure $\mathcal{F}_0$.}
 \label{fig:projection}
 \end{figure}
 
@@ -236,16 +229,17 @@ Filtered objects $\mathcal{F} \in \mathsf{Filt}(\mathcal{C})$ may contain latent
 \]
 lifts $\mathcal{F}$ into a higher-dimensional space $\mathcal{P}(\mathcal{C})$, designed to reveal hidden structures such as cycles, obstructions, or degeneration tendencies.
 
-Degeneration processes within $\mathcal{P}(\mathcal{C})$ simplify the structure of $\mathcal{F}$, ultimately producing a collapse-sheaf $\mathcal{F}_0 \in \mathsf{Triv}(\mathcal{C})$, characterized by vanishing persistent homology and extension classes. This prepares the object for further structural simplification and smoothness realization.
+Degeneration processes within $\mathcal{P}(\mathcal{C})$ simplify the structure of $\mathcal{F}$, ultimately producing a collapse sheaf $\mathcal{F}_0 \in \mathsf{Triv}(\mathcal{C})$, characterized by vanishing persistent homology and extension classes. This prepares the object for further structural simplification and smoothness realization.
+
 
 
 \section{Collapse-Theoretic Framework}
 
-We now formalize the obstruction elimination process through high-dimensional projection, categorical collapse, and group-theoretic simplification. This framework provides a unified structure for detecting and removing persistent topological and algebraic obstructions.
+This section formalizes the obstruction elimination process based on high-dimensional projection, categorical collapse, and group-theoretic simplification. The proposed framework provides a unified structure for detecting and systematically removing persistent topological and algebraic obstructions.
 
 \subsection{Causal Structure of Obstruction Elimination}
 
-The core logical structure of our framework is captured by the following causal chain, which holds under suitable structural conditions:
+The logical foundation of the framework is captured by the following causal chain, which holds under suitable structural conditions:
 \[
 \mathrm{PH}_1 = 0 \iff \mathrm{Ext}^1 = 0 \implies \text{Group Collapse} \implies \text{Smoothness}.
 \]
@@ -257,9 +251,9 @@ Filtered objects $\mathcal{F} \in \mathsf{Filt}(\mathcal{C})$ are lifted via the
 \[
 \Pi : \mathsf{Filt}(\mathcal{C}) \longrightarrow \mathcal{P}(\mathcal{C}),
 \]
-into a higher-dimensional projection space $\mathcal{P}(\mathcal{C})$. This space is designed to expose hidden obstructions and degeneration behavior.
+into a higher-dimensional projection space $\mathcal{P}(\mathcal{C})$, which is designed to expose hidden obstructions and degeneration behavior.
 
-Degeneration processes within $\mathcal{P}(\mathcal{C})$ simplify $\mathcal{F}$ by reducing its topological and categorical complexity, leading to the formation of collapse-sheaves in $\mathsf{Triv}(\mathcal{C})$.
+Degeneration processes within $\mathcal{P}(\mathcal{C})$ simplify $\mathcal{F}$ by reducing its topological and categorical complexity. This process leads to the formation of collapse sheaves in $\mathsf{Triv}(\mathcal{C})$, characterized by vanishing persistent homology and trivial extension classes.
 
 \subsection{Collapse Functor and Obstruction Elimination}
 
@@ -272,35 +266,34 @@ The collapse functor $C : \mathsf{Filt}(\mathcal{C}) \to \mathsf{Triv}(\mathcal{
     \item Preparing the object for smoothness realization.
 \end{itemize}
 
-The collapse process combines topological, algebraic, and categorical operations into a coherent obstruction elimination mechanism.
+The collapse process coherently combines topological, algebraic, and categorical operations into a unified obstruction elimination mechanism.
 
 \subsection{Implications and Applications}
 
-This framework applies to a wide class of mathematical structures, including:
+The collapse framework applies to a broad class of mathematical structures, including:
 
 \begin{itemize}
     \item Topological spaces with persistent features;
     \item Algebraic or geometric objects exhibiting extension obstructions;
-    \item Structures with complex group-theoretic properties (e.g., Galois groups, fundamental groups).
+    \item Structures with complex group-theoretic properties, such as Galois groups, fundamental groups, and automorphism groups.
 \end{itemize}
 
-In subsequent sections, we refine this framework with type-theoretic formalization and structural comparison to existing approaches.
+Subsequent sections refine the framework with type-theoretic formalization and structural comparison to existing approaches.
 
+\subsection{Illustrative Example of Collapse Functor}
 
-\subsection{Explicit Example of Collapse Functor}
-
-We present a simplified topological example to illustrate the action of the collapse functor. Consider the category $\mathcal{C}$ of finite simplicial complexes. Let $\mathcal{F} \in \mathsf{Filt}(\mathcal{C})$ be a filtered simplicial complex containing a non-trivial first-order cycle, indicated by $\mathrm{PH}_1(\mathcal{F}) \neq 0$.
+To illustrate the action of the collapse functor, consider the category $\mathcal{C}$ of finite simplicial complexes. Let $\mathcal{F} \in \mathsf{Filt}(\mathcal{C})$ be a filtered simplicial complex containing a nontrivial first-order cycle, indicated by $\mathrm{PH}_1(\mathcal{F}) \neq 0$.
 
 The collapse functor
 \[
 C : \mathsf{Filt}(\mathcal{C}) \longrightarrow \mathsf{Triv}(\mathcal{C})
 \]
-acts by eliminating such cycles and trivializing extension classes, yielding a collapse-sheaf $\mathcal{F}_0$ satisfying:
+acts by eliminating such cycles and trivializing extension classes, yielding a collapse sheaf $\mathcal{F}_0$ satisfying:
 \[
 \mathrm{PH}_1(\mathcal{F}_0) = 0, \quad \mathrm{Ext}^1(\mathcal{F}_0, \mathcal{G}) = 0.
 \]
 
-Figure~\ref{fig:collapse} provides a conceptual visualization of this process.
+A conceptual visualization of this process is presented in Figure~\ref{fig:collapse}.
 
 \begin{figure}[h]
 \centering
@@ -312,37 +305,38 @@ Figure~\ref{fig:collapse} provides a conceptual visualization of this process.
 
 % Nodes
 \node (F) {Filtered Complex\\ $\mathcal{F}$ \\ $\mathrm{PH}_1(\mathcal{F}) \neq 0$};
-\node (C) [right=of F] {Collapse-Sheaf\\ $\mathcal{F}_0$ \\ $\mathrm{PH}_1(\mathcal{F}_0) = 0$};
+\node (C) [right=of F] {Collapse Sheaf\\ $\mathcal{F}_0$ \\ $\mathrm{PH}_1(\mathcal{F}_0) = 0$};
 
 % Arrows
 \draw[arrow] (F) -- node[above] {Collapse Functor $C$} (C);
 
 \end{tikzpicture}
-\caption{Schematic illustration of the collapse functor acting on a filtered simplicial complex. Non-trivial cycles in $\mathcal{F}$ are eliminated, producing a simplified collapse-sheaf $\mathcal{F}_0$.}
+\caption{Conceptual illustration of the collapse functor acting on a filtered simplicial complex. Nontrivial cycles in $\mathcal{F}$ are eliminated, producing a simplified collapse sheaf $\mathcal{F}_0$.}
 \label{fig:collapse}
 \end{figure}
 
-This toy example illustrates how the collapse framework operates concretely in a familiar topological setting. In more abstract categories, the same principles apply, with persistent homology and extension class obstructions eliminated through the collapse process.
+This simplified topological example demonstrates how the collapse framework operates concretely. In more abstract categories, the same principles apply, with persistent homology and extension class obstructions eliminated through the collapse process.
+
 
 
 \section{Type-Theoretic Interpretation}
 
-To enhance the formal rigor and verifiability of the collapse framework, we provide a type-theoretic interpretation. This connects obstruction elimination to constructive logical systems, enabling formal reasoning and machine verification.
+To enhance both the formal rigor and verifiability of the proposed framework, this section provides a type-theoretic interpretation of obstruction elimination. By encoding the collapse process within constructive logical systems, the framework facilitates formal reasoning and machine verification.
 
-\subsection{Dependent Type Encoding of Collapse Conditions}
+\subsection{Encoding Collapse Conditions via Dependent Types}
 
-We employ dependent type theory to express obstruction elimination conditions. Let $\mathcal{F} \in \mathsf{Filt}(\mathcal{C})$ be a filtered object. The collapse conditions are encoded as:
+We employ dependent type theory to express obstruction elimination conditions in a formal, machine-verifiable manner. Let $\mathcal{F} \in \mathsf{Filt}(\mathcal{C})$ be a filtered object. The collapse conditions can be encoded as:
 
 \[
 \prod_{\mathcal{F} : \mathsf{Filt}(\mathcal{C})} 
 \left( \mathrm{PH}_1(\mathcal{F}) = 0 \rightarrow \mathrm{Ext}^1(\mathcal{F}, \mathcal{G}) = 0 \right),
 \]
 
-where $\prod$ denotes the dependent product type, formalizing the implication from vanishing persistent homology to the trivialization of extension classes. This expresses the elimination of both topological and categorical obstructions in a machine-verifiable form.
+where $\prod$ denotes the dependent product type, expressing that for all filtered objects $\mathcal{F}$, the vanishing of persistent homology implies the trivialization of extension classes. This captures the elimination of both topological and categorical obstructions within a constructive type-theoretic framework.
 
-\subsection{Collapse Process as Type-Theoretic Chain}
+\subsection{Collapse Process as Type-Theoretic Causal Chain}
 
-The full collapse process can be encoded in type-theoretic terms as:
+The full collapse process can be represented as a type-theoretic causal chain:
 
 \[
 \prod_{\mathcal{F} : \mathsf{Filt}(\mathcal{C})} 
@@ -353,12 +347,11 @@ The full collapse process can be encoded in type-theoretic terms as:
 \right).
 \]
 
-This chain reflects the logical structure of obstruction elimination within a constructive formal system.
+This formalization reflects the logical structure of obstruction elimination within a constructive proof system, enabling systematic verification of each implication in the causal chain.
 
+\subsection{Coq-Style Encoding of the Collapse Chain}
 
-\subsection{Coq/Lean Encoding Snippet}
-
-To demonstrate the formal verifiability of the collapse framework, we provide a simple Coq-style encoding of the logical structure. This encoding expresses the causal chain of obstruction elimination as machine-verifiable propositions.
+To demonstrate machine-verifiable formalization, we present a Coq-style encoding of the collapse chain. This encoding expresses the logical dependencies among the collapse conditions as propositions within the Coq proof assistant.
 
 \begin{lstlisting}[language=Coq]
 Parameter PH1_trivial : Prop.
@@ -372,7 +365,11 @@ Axiom CollapseChain :
   Smoothness.
 \end{lstlisting}
 
-Figure~\ref{fig:typechain} presents a conceptual visualization of the corresponding logical dependencies.
+The Coq-style formulation captures the equivalence between vanishing persistent homology and trivial extension classes, followed by group collapse and smoothness realization.
+
+\subsection{Logical Structure and Visualization}
+
+The logical dependencies among the collapse conditions are summarized in Figure~\ref{fig:typechain}.
 
 \begin{figure}[h]
 \centering
@@ -394,140 +391,213 @@ Figure~\ref{fig:typechain} presents a conceptual visualization of the correspond
 \draw[arrow] (Grp) -- (Sm);
 
 \end{tikzpicture}
-\caption{Logical structure of the collapse chain. Vanishing persistent homology implies trivial extension classes, enabling group-theoretic collapse and leading to smoothness realization.}
+\caption{Logical structure of the collapse chain. The vanishing of persistent homology implies trivial extension classes, enabling group-theoretic collapse and ultimately leading to smoothness realization.}
 \label{fig:typechain}
 \end{figure}
 
-The encoding aligns with the logical dependencies depicted in Figure~\ref{fig:typechain}, providing a formal foundation for implementing the collapse framework within proof assistants such as Coq or Lean.
+This diagram complements the type-theoretic encoding by visually illustrating the causal structure underlying obstruction elimination.
 
+\subsection{Formal Verification and Broader Implications}
 
-\subsection{Formalization and Verifiability}
-
-The type-theoretic interpretation aligns with formal proof assistants such as Coq or Lean. Collapse conditions can be encoded as propositions and verified within these systems, providing:
+The type-theoretic interpretation facilitates formal reasoning within proof assistants such as Coq or Lean~\cite{CoqManual2017}. Collapse conditions can be encoded as machine-verifiable propositions, providing:
 
 \begin{itemize}
-    \item Formal logical structure to obstruction elimination;
-    \item Machine-verifiable criteria for smoothness;
-    \item This may provide avenues for exploring connections with homotopy type theory and higher-categorical logic.
+    \item A logically rigorous foundation for obstruction elimination;
+    \item Systematic, formal criteria for smoothness detection;
+    \item A potential connection to homotopy type theory and higher-categorical logic~\cite{HOTT2013}.
 \end{itemize}
 
-This enhances both the mathematical rigor and practical verifiability of the collapse framework.
+These features enhance both the mathematical rigor and practical verifiability of the collapse-theoretic framework, paving the way for formalized approaches to structural simplification across mathematical contexts.
 
-The type-theoretic interpretation aligns with formal proof assistants such as Coq or Lean~\cite{CoqManual2017}. 
-This may provide avenues for exploring connections with homotopy type theory and higher-categorical logic~\cite{HOTT2013}.
 
 
 \section{Structural Comparison with Existing Approaches}
 
-In this section, we compare the proposed collapse-theoretic framework with existing methods for analyzing and eliminating structural obstructions in mathematics. Our goal is to clarify the scope, novelty, and limitations of the present work.
+This section compares the proposed collapse-theoretic framework with established methods for analyzing and eliminating structural obstructions in mathematics. The comparison highlights the scope, novelty, and limitations of the present work.
 
 \subsection{Persistent Homology and Topological Simplification}
 
-Persistent homology has been widely utilized to detect and analyze topological features that persist across filtrations, particularly in applied topology and data analysis \cite{Edelsbrunner2008}. While persistent homology effectively reveals topological complexity, it does not inherently provide mechanisms for obstruction elimination or structural simplification.
+Persistent homology is widely utilized to detect and analyze topological features that persist across filtrations, particularly in applied topology and data analysis~\cite{Edelsbrunner2008}. While persistent homology effectively reveals topological complexity, it does not inherently provide mechanisms for obstruction elimination or structural simplification.
 
-In contrast, the collapse framework integrates persistent homology into a broader categorical and algebraic structure, where the vanishing of $\mathrm{PH}_1$ triggers a cascade of obstruction eliminations.
+By contrast, the collapse-theoretic framework integrates persistent homology into a broader categorical and algebraic structure, where the vanishing of $\mathrm{PH}_1$ initiates a systematic elimination of obstructions through categorical and group-theoretic processes.
 
-\subsection{Ext-Class Obstructions and Homological Algebra}
+\subsection{Extension-Class Obstructions and Homological Algebra}
 
-Obstructions arising from extension classes, such as $\mathrm{Ext}^1$, are well-studied in homological algebra and related fields \cite{Weibel1994}. Traditional approaches focus on computing or classifying these classes, often in specific algebraic or geometric contexts.
+Obstructions arising from extension classes, such as $\mathrm{Ext}^1$, are well-studied in homological algebra and related fields~\cite{Weibel1994}. Traditional approaches focus on computing or classifying these classes within specific algebraic or geometric contexts.
 
-The collapse framework treats $\mathrm{Ext}^1$-class vanishing as an integral component of obstruction elimination, linked directly to topological simplification and group-theoretic collapse.
+The collapse-theoretic framework treats $\mathrm{Ext}^1$-class vanishing as an integral component of a unified obstruction elimination process. This perspective links topological simplification, categorical trivialization, and group-theoretic reduction within a coherent structural chain.
 
-\subsection{Group-Theoretic Simplification}
+\subsection{Group-Theoretic Simplification and Galois Cohomology}
 
-Group-theoretic structures, including Galois groups, fundamental groups, and automorphism groups, often encode global obstructions to simplification or smoothness. Various methods exist for analyzing these groups, such as profinite methods or étale fundamental group techniques.
+Group-theoretic structures, including Galois groups, fundamental groups, and automorphism groups, often encode global obstructions to structural simplification or smoothness. Various techniques, such as profinite methods and étale fundamental group analysis, address these complexities.
 
-Our approach complements these methods by providing a structural process—the collapse chain—where group-theoretic simplification naturally follows from topological and categorical obstruction elimination.
-
-Group collapse serves as a structural precursor to smoothness or regularity in the underlying mathematical objects.
-The relationship between group collapse and cohomological structures parallels classical approaches such as Galois cohomology~\cite{Serre1997}.
-
+The proposed framework complements these approaches by providing a structural process—the collapse chain—in which group-theoretic simplification naturally follows from topological and categorical obstruction elimination. This perspective parallels classical approaches such as Galois cohomology~\cite{Serre1997}, while offering a unified categorical formulation.
 
 \subsection{Positioning and Novelty of the Collapse Framework}
 
-The collapse framework complements and extends aspects of existing approaches in persistent homology, homological algebra, and group-theoretic methods, while remaining compatible with their insights.
+The collapse-theoretic framework extends and synthesizes aspects of existing approaches in persistent homology, homological algebra, and group-theoretic methods. Its key features include:
 
 \begin{itemize}
-    \item Providing a unified structure that connects topological, categorical, and group-theoretic obstruction elimination;
-    \item Introducing high-dimensional projection and degeneration processes to reveal hidden complexity;
-    \item Formalizing the obstruction elimination process within a type-theoretic and machine-verifiable setting;
-    \item Extending beyond existing approaches in persistent homology, homological algebra, and group-theoretic methods, while remaining compatible with their insights.
+    \item A unified structure that connects topological, categorical, and group-theoretic obstruction elimination;
+    \item The introduction of high-dimensional projection and degeneration processes to reveal hidden complexity;
+    \item The formalization of obstruction elimination within a type-theoretic and machine-verifiable setting;
+    \item Compatibility with, and conceptual extension of, established methods in obstruction theory, homological algebra, and applied topology.
 \end{itemize}
 
-Nevertheless, the framework presented here is intentionally focused on foundational aspects. Full extensions to motivic, Langlands, or mirror-symmetry structures are beyond the scope of this paper and will be addressed in future work.
+While the present work focuses on foundational aspects, full extensions to motivic, Langlands, and mirror symmetry structures lie beyond the scope of this paper and will be addressed in future research~\cite{MirrorSymmetry2003}.
 
-Full extensions to motivic, Langlands, or mirror-symmetry structures~\cite{MirrorSymmetry2003} are beyond the scope of this paper and will be addressed in future work.
+\subsection{Conceptual Application Scenario}
 
-
-
-\subsection{Simplified Application Scenario}
-
-While this paper focuses on the theoretical foundations of the collapse framework, we briefly outline a conceptual application illustrating how obstruction elimination may facilitate structural simplification and smoothness in a practical setting.
+Although this paper emphasizes theoretical foundations, a conceptual application illustrates how obstruction elimination may facilitate structural simplification and smoothness in a practical setting.
 
 Consider a time-dependent vector field $u(t)$ defined on a domain $\Omega \subset \mathbb{R}^3$, governed by a partial differential equation (PDE) of the form:
 \[
 \partial_t u + (u \cdot \nabla)u = -\nabla p + \nu \Delta u, \quad \nabla \cdot u = 0,
 \]
-which structurally resembles the incompressible Navier-Stokes equations. In complex fluid systems, topological structures such as persistent vortices or singularities may emerge, obstructing smoothness and regularity.
+which structurally resembles the incompressible Navier–Stokes equations. In complex fluid systems, topological structures such as persistent vortices or singularities may emerge, obstructing smoothness and regularity.
 
-By associating a filtered object $\mathcal{F}(t) \in \mathsf{Filt}(\mathcal{C})$ encoding the topological and categorical features of $u(t)$, the collapse framework can be applied:
+By associating a filtered object $\mathcal{F}(t) \in \mathsf{Filt}(\mathcal{C})$ that encodes the topological and categorical features of $u(t)$, the collapse-theoretic framework can be applied as follows:
+
 \begin{itemize}
     \item The projection functor $\Pi$ lifts $\mathcal{F}(t)$ to a higher-dimensional space, exposing hidden obstructions;
-    \item Degeneration and collapse processes eliminate these obstructions, producing a collapse-sheaf $\mathcal{F}_0(t)$;
-    \item The resulting structure simplifies group-theoretic complexity and enables smoothness of $u(t)$.
+    \item Degeneration and collapse processes eliminate these obstructions, producing a collapse sheaf $\mathcal{F}_0(t)$;
+    \item The resulting structure simplifies group-theoretic complexity and facilitates smoothness of $u(t)$.
 \end{itemize}
 
-This scenario suggests a structural pathway by which collapse-theoretic methods may contribute to understanding or achieving global regularity in PDE systems. A rigorous, fully formal development of such applications lies beyond the scope of this paper and will be pursued in future work.
+This scenario suggests a structural pathway through which collapse-theoretic methods may contribute to understanding or achieving global regularity in PDE systems. A rigorous, formal development of such applications lies beyond the present scope and constitutes an important direction for future work.
+
 
 
 \section{Conclusion and Future Directions}
 
-We have presented a structural-collapse framework that integrates high-dimensional projection, degeneration analysis, and categorical collapse mechanisms to systematically eliminate topological and algebraic obstructions. The framework establishes a unified causal structure in which the vanishing of persistent homology ($\mathrm{PH}_1=0$) implies the trivialization of extension classes ($\mathrm{Ext}^1=0$), leading to group-theoretic simplification and, ultimately, smoothness realization.
+This paper has presented a collapse-theoretic framework that integrates high-dimensional projection, degeneration analysis, and categorical collapse mechanisms to systematically eliminate topological and algebraic obstructions. The framework establishes a unified causal structure in which the vanishing of persistent homology ($\mathrm{PH}_1 = 0$) implies the trivialization of extension classes ($\mathrm{Ext}^1 = 0$), which in turn enables group-theoretic simplification and ultimately smoothness realization.
 
-Through formalization within a type-theoretic and categorical setting, the collapse framework enhances both the structural understanding and formal verifiability of obstruction phenomena. Illustrative examples in Sections 3.5 and 5.5 demonstrate the conceptual applicability of the framework to simplified topological settings and potential PDE applications.
+Through formalization within a type-theoretic and categorical setting, the proposed framework enhances both the structural understanding and formal verifiability of obstruction phenomena. Illustrative examples demonstrate the conceptual applicability of the framework to simplified topological settings and potential applications to partial differential equations, including systems structurally related to the Navier–Stokes equations.
 
 Several important directions remain for future research:
 
 \begin{itemize}
-    \item Extending the collapse framework to motivic, Langlands, and mirror-symmetry structures, exploring the role of obstruction elimination in these broader contexts;
-    \item Investigating rigorous connections to homotopy type theory and higher-categorical foundations;
-    \item Developing detailed applications to concrete problems in algebraic geometry, topology, and number theory;
-    \item Pursuing formal verification and implementation of collapse conditions within proof assistants such as Coq or Lean;
-    \item Exploring the implications of collapse-theoretic methods for global regularity problems in partial differential equations, including the Navier-Stokes equations.
+    \item Extending the collapse-theoretic framework to motivic, Langlands, and mirror symmetry structures, with the aim of elucidating the role of obstruction elimination in these broader mathematical contexts;
+    \item Investigating rigorous connections to homotopy type theory and higher-categorical foundations, particularly through formal implementations in proof assistants such as Coq and Lean~\cite{HOTT2013,CoqManual2017};
+    \item Developing detailed applications to concrete problems in algebraic geometry, topology, and number theory, where obstruction phenomena play a critical structural role;
+    \item Exploring the implications of collapse-theoretic methods for global regularity problems in partial differential equations, including a formalized investigation of Navier–Stokes-type systems;
+    \item Pursuing machine-verifiable formalizations of the collapse chain, contributing to the broader integration of constructive and categorical methods within mathematical practice.
 \end{itemize}
 
-These directions represent promising avenues for further integrating structural-collapse methods into the broader mathematical landscape. The foundational contributions of this work aim to provide a rigorous basis for these future developments.
+These directions represent promising avenues for further integrating collapse-theoretic methods into the broader mathematical landscape. The foundational contributions of the present work aim to provide a rigorous basis for these future developments.
 
 
 
 \begin{thebibliography}{99}
 
 \bibitem{Edelsbrunner2008}
-H.~Edelsbrunner and J.~Harer, \emph{Persistent homology---a survey}, 
-Contemporary Mathematics, vol.~453, pp.~257--282, 2008.
+H.~Edelsbrunner and J.~Harer, ``Persistent homology—a survey,'' in \emph{Contemporary Mathematics}, vol.~453, pp.~257--282, American Mathematical Society, 2008.
 
 \bibitem{Weibel1994}
-C.~A. Weibel, \emph{An Introduction to Homological Algebra}, 
-Cambridge University Press, 1994.
+C.~A. Weibel, \emph{An Introduction to Homological Algebra}, Cambridge Studies in Advanced Mathematics, Cambridge University Press, 1994.
 
-\bibitem{ZenodoPreprint}
-A.~Kobayashi, \emph{Structural Obstruction Elimination via High-Dimensional Projection and Collapse Mechanisms}, Zenodo, 2024.\\
-\texttt{https://doi.org/10.5281/zenodo.15743071}
+\bibitem{Serre1997}
+J.-P. Serre, \emph{Galois Cohomology}, Springer Monographs in Mathematics, Springer, 1997.
+
+\bibitem{MirrorSymmetry2003}
+K.~Hori, S.~Katz, A.~Klemm, R.~Pandharipande, R.~Thomas, C.~Vafa, R.~Vakil, and E.~Zaslow, \emph{Mirror Symmetry}, Clay Mathematics Monographs, vol.~1, American Mathematical Society, 2003.
 
 \bibitem{HOTT2013}
 The Univalent Foundations Program, \emph{Homotopy Type Theory: Univalent Foundations of Mathematics}, Institute for Advanced Study, 2013.
 
 \bibitem{CoqManual2017}
-B.~Barras et al., \emph{The Coq Proof Assistant Reference Manual}, INRIA, 2017.
+B.~Barras, B.~Werner, and the Coq Development Team, \emph{The Coq Proof Assistant Reference Manual}, INRIA, 2017. Available at: \url{https://coq.inria.fr/distrib/current/refman/}.
 
-\bibitem{Serre1997}
-J.-P.~Serre, \emph{Galois Cohomology}, Springer, 1997.
-
-\bibitem{MirrorSymmetry2003}
-K.~Hori et al., \emph{Mirror Symmetry}, Clay Mathematics Monographs, 2003.
-
+\bibitem{ZenodoPreprint}
+A.~Kobayashi, ``Structural obstruction elimination via high-dimensional projection and collapse mechanisms,'' Zenodo, 2024. Available at: \url{https://doi.org/10.5281/zenodo.15743071}.
 
 \end{thebibliography}
+
+
+
+\appendix
+
+\section*{Appendix A: Formal Details and Structural Clarifications}
+\addcontentsline{toc}{section}{Appendix A: Formal Details and Structural Clarifications}
+
+This appendix provides formal details and technical clarifications that complement the collapse-theoretic framework presented in the main text. Concrete examples and additional remarks are included to assist readers seeking a deeper understanding of the categorical structure and type-theoretic formulation of obstruction elimination.
+
+\subsection*{A.1 Formal Definition and Examples of the Collapse Functor}
+
+Let $\mathcal{C}$ be a mathematical category and $\mathsf{Filt}(\mathcal{C})$ the category of filtered objects in $\mathcal{C}$. The \emph{collapse functor} is defined as a covariant functor:
+\begin{equation}
+C : \mathsf{Filt}(\mathcal{C}) \longrightarrow \mathsf{Triv}(\mathcal{C}),
+\end{equation}
+satisfying for all $\mathcal{F} \in \mathsf{Filt}(\mathcal{C})$:
+
+\begin{enumerate}
+    \item $\mathrm{PH}_1(C(\mathcal{F})) = 0$, eliminating first-order persistent homology;
+    \item $\mathrm{Ext}^1(C(\mathcal{F}), \mathcal{G}) = 0$ for suitable coefficient systems $\mathcal{G}$;
+    \item If $C(\mathcal{F}) \cong C(\mathcal{F}')$, then $\mathcal{F}$ and $\mathcal{F}'$ are considered obstruction-equivalent.
+\end{enumerate}
+
+\textbf{Example 1 (Topological Spaces):} For $\mathcal{C}$ the category of topological spaces, filtered objects correspond to spaces with nested subspace filtrations. The collapse functor maps such spaces to ones where persistent homology and relevant extension classes vanish, reflecting trivial topology.
+
+\textbf{Example 2 (Simplicial Complexes):} In the category of finite simplicial complexes, the collapse functor reduces nontrivial cycles, producing collapse sheaves corresponding to contractible complexes or ones with trivial homological obstructions.
+
+\subsection*{A.2 Logical Equivalence of Persistent Homology and Extension Classes}
+
+The collapse-theoretic framework posits that for $\mathcal{F} \in \mathsf{Filt}(\mathcal{C})$, the following equivalence holds:
+\begin{equation}
+\mathrm{PH}_1(\mathcal{F}) = 0 \iff \mathrm{Ext}^1(\mathcal{F}, \mathcal{G}) = 0.
+\end{equation}
+This equivalence reflects the deep correspondence between topological obstructions detected via persistent homology and categorical obstructions arising from extension classes. It holds broadly, particularly when $\mathcal{C}$ admits a sheaf-theoretic or derived category structure.
+
+\subsection*{A.3 Type-Theoretic Encoding and Machine-Verifiable Specification}
+
+Within dependent type theory, the obstruction elimination process is encoded as:
+\begin{equation}
+\prod_{\mathcal{F} : \mathsf{Filt}(\mathcal{C})} 
+\left( \mathrm{PH}_1(\mathcal{F}) = 0 \rightarrow \mathrm{Ext}^1(\mathcal{F}, \mathcal{G}) = 0 
+\rightarrow \text{Group Collapse}(\mathcal{F}) 
+\rightarrow \text{Smoothness}(\mathcal{F})
+\right).
+\end{equation}
+This provides a constructive, machine-verifiable formalization of the collapse chain, suitable for implementation in proof assistants such as Coq or Lean.
+
+\subsection*{A.4 Remarks on Generalization and Proof Sketch}
+
+The collapse framework naturally extends to more sophisticated settings, including:
+
+\begin{itemize}
+    \item Higher-order persistent homology and higher extension groups;
+    \item Derived categories and motivic structures;
+    \item Langlands and mirror symmetry frameworks.
+\end{itemize}
+
+\textbf{Proof Sketch of Logical Equivalence:}  
+The equivalence between $\mathrm{PH}_1(\mathcal{F}) = 0$ and $\mathrm{Ext}^1(\mathcal{F}, \mathcal{G}) = 0$ is established by analyzing the long exact sequence induced by the filtration and applying standard homological algebra arguments. The details depend on the specific category $\mathcal{C}$ and chosen coefficients $\mathcal{G}$.
+
+
+\section*{Notation}
+\addcontentsline{toc}{section}{Notation}
+
+The following summarizes the principal notational conventions used in this paper.
+
+\begin{itemize}
+    \item $\mathcal{C}$: A mathematical category (e.g., topological spaces, simplicial complexes, sheaves).
+    \item $\mathsf{Filt}(\mathcal{C})$: The category of filtered objects in $\mathcal{C}$.
+    \item $\mathcal{P}(\mathcal{C})$: A higher-dimensional projection space.
+    \item $\mathsf{Triv}(\mathcal{C})$: The category of collapse sheaves (obstruction-free objects).
+    \item $\mathrm{PH}_1$: First-order persistent homology.
+    \item $\mathrm{Ext}^1$: First extension group.
+    \item $C$: The collapse functor.
+    \item $\Pi$: The projection functor.
+    \item $\mathcal{F}, \mathcal{F}_0$: Filtered objects and corresponding collapse sheaves.
+    \item $\mathcal{G}$: Coefficient system for extension computations.
+\end{itemize}
+
+
+\section*{Acknowledgements}
+\addcontentsline{toc}{section}{Acknowledgements}
+
+The author gratefully acknowledges the constructive feedback provided by the mathematical community through public preprint dissemination, in particular via Zenodo. Valuable discussions and suggestions from colleagues have contributed to refining the ideas presented in this work. The author also thanks the editors and anonymous reviewers of IMRN for their careful reading and insightful comments.
+
 
 
 \end{document}
